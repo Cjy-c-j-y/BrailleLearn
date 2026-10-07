@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<meta name="description" content="轻量化盲文学习平台 · 汉字拼音盲文对照 · 语音朗读 · 交互刷题">
+<title>盲文学习平台 · Braille Learning</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="app-header">
+    <h1>盲文学习平台</h1>
+    <p>Braille Learning</p>
+  </header>
+
+  <main>
+
+    <!-- ========== 视图一：学习 ========== -->
+    <section class="view active" id="view-learn">
+      <div class="cat-bar" id="learnCatBar"></div>
+      <div class="learn-card">
+        <div class="learn-hanzi" id="learnHanzi">你</div>
+        <div class="learn-pinyin" id="learnPinyin">nǐ</div>
+        <div class="braille-stage" id="learnStage">
+          <canvas id="learnCanvas"></canvas>
+        </div>
+        <div class="learn-sentence" id="learnSentence"></div>
+      </div>
+
+      <div class="learn-actions">
+        <button class="btn-icon" id="btnSpeak" aria-label="朗读">🔊</button>
+        <button class="btn-icon" id="btnStar" aria-label="收藏">☆</button>
+        <button class="btn-main" id="btnNext">下一个 →</button>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="learnProgress"></div>
+      </div>
+      <div class="progress-text" id="learnProgressText">1 / 1</div>
+    </section>
+
+    <!-- ========== 视图二：转译 ========== -->
+    <section class="view" id="view-translate">
+      <div class="translate-box">
+        <input id="transInput" type="text" placeholder="输入汉字或拼音，如：你好 / ni hao"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="translate-tip">支持汉字逐字转换 · 拼音按空格分隔 · 点击结果可朗读</div>
+      </div>
+      <div class="trans-out" id="transOut"></div>
+      <div class="empty-tip" id="transEmpty">
+        输入内容后<br>这里会实时显示对应的盲文点阵 ✨
+      </div>
+    </section>
+
+    <!-- ========== 视图三：刷题 ========== -->
+    <section class="view" id="view-quiz">
+      <div class="cat-bar" id="quizCatBar"></div>
+      <div class="quiz-panel">
+        <div class="quiz-head">
+          <span class="quiz-type-tag" id="quizTypeTag">盲文辨汉字</span>
+          <span id="quizRound">第 1 题</span>
+        </div>
+
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="opts" id="quizOpts"></div>
+
+        <div class="quiz-feedback" id="quizFeedback"></div>
+
+        <div class="quiz-footer">
+          <span class="quiz-score">
+            得分 <b id="quizScore">0</b> / <b id="quizTotal">0</b>
+          </span>
+          <button class="btn-next" id="btnQuizNext">下一题 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 视图四：我的 ========== -->
+    <section class="view" id="view-me">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="statLearned">0</div>
+          <div class="stat-label">已学字词</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statRate">0%</div>
+          <div class="stat-label">答题正确率</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statStar">0</div>
+          <div class="stat-label">生词收藏</div>
+        </div>
+      </div>
+
+      <div class="section-title">📒 我的生词本</div>
+      <div class="word-list" id="starList"></div>
+
+      <div class="section-title">❌ 我的错题本</div>
+      <div class="word-list" id="wrongList"></div>
+
+      <button class="btn-danger" id="btnClearWrong" style="margin-top:14px;">清空错题本</button>
+      <button class="btn-danger" id="btnClear">清空全部学习数据</button>
+    </section>
+
+  </main>
+</div>
+
+<!-- ========== 底部导航 ========== -->
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-view="learn">
+    <span class="tab-ico">📖</span><span>学习</span>
+  </button>
+  <button class="tab" data-view="translate">
+    <span class="tab-ico">⌨️</span><span>转译</span>
+  </button>
+  <button class="tab" data-view="quiz">
+    <span class="tab-ico">🎯</span><span>刷题</span>
+  </button>
+  <button class="tab" data-view="me">
+    <span class="tab-ico">👤</span><span>我的</span>
+  </button>
+</nav>
+
+<script src="js/braille-data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/braille-renderer.js"></script>
+<script src="js/speech.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/learn.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/me.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
